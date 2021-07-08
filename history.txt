@@ -1,0 +1,309 @@
+    1  yum install bash-completion -y vim git 
+    2  ssh-keyge
+    3  ssh-keygen
+    4  eval "$(ssh-agent -s)"
+    5  ssh-add .ssh/id_rsa
+    6  wget
+    7  yum install wget -y
+    8  wget  http://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest-4.5/openshift-client-linux-4.5.41.tar.gz
+    9  wget http://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest-4.5/openshift-install-linux-4.5.41.tar.gz
+   10  tar xzvf openshift-install-linux-4.5.41.tar.gz 
+   11  tar xzvf openshift-client-linux-4.5.41.tar.gz 
+   12  cp oc /usr/bin/
+   13  mkdir open
+   14  cp openshift-install open
+   15  cd open
+   16  ls
+   17  mkdir new ; ./openshift-install   create install-config --dir=new
+   18  cd te
+   19  ls
+   20  cd new/
+   21  ls
+   22  vim install-config.yaml s
+   23  vim install-config.yaml 
+   24  cd ..
+   25  ls
+   26  ./openshift-install create cluster --dir=new --log-level debug
+   27  vim new/install-config.yaml 
+   28  ./openshift-install create cluster --dir=new --log-level debug
+   29  oc adm policy add-cluster-role-to-user cluster-admin admin 
+   30  htpasswd -cbB ex288 admin redhat@12345
+   31  htpasswd -cbB ex288 user1  redhat
+   32  htpasswd -cbB ex288 user2  redhat
+   33  htpasswd -cbB ex288 user3  redhat
+   34  htpasswd -cbB ex288 user4  redhat
+   35  htpasswd -cbB ex288 admin redhat@12345
+   36  htpasswd -bB ex288 user1  redhat
+   37  htpasswd -bB ex288 user2  redhat
+   38  htpasswd -bB ex288 user3  redhat
+   39  htpasswd -bB ex288 user4  redhat
+   40  htpasswd -bB ex288 user5  redhat
+   41  htpasswd -bB ex288 user6  redhat
+   42  htpasswd -bB ex288 user7  redhat
+   43  htpasswd -bB ex288 user8  redhat
+   44  htpasswd -bB ex288 user  redhat
+   45  htpasswd -bB ex288 user9  redhat
+   46  htpasswd -bB ex288 user10  redhat
+   47  htpasswd -bB ex288 user11  redhat
+   48  cat ex288 
+   49  oc create secret generic ex288 --from-file htpasswd=ex288 -n openshift-config 
+   50  oc edit oauth cluster
+   51  vim oauth.yaml
+   52  oc apply  -f oauth.yaml 
+   53  oc get pods -n openshift-authentication
+   54  watch 
+   55  watch oc get pods -n openshift-authentication
+   56  oc login -u admin https://api.simple.ex280.openshiftlab.xyz:6443
+   57  oc get nodes
+   58  cd
+   59  oc login -u user1 -p redhat https://api.simple.ex280.openshiftlab.xyz:6443
+   60  oc login -u user2 -p redhat https://api.simple.ex280.openshiftlab.xyz:6443
+   61  oc login -u admin https://api.simple.ex280.openshiftlab.xyz:6443
+   62  oc get nodes
+   63  ls
+   64  cd open/new/
+   65  ls
+   66  cd auth/
+   67  ls
+   68  cat kubeconfig 
+   69  ls
+   70  cat kubep
+   71  cat kubeadmin-password 
+   72  oc login -u kubeadmin -p mJTwn-TbB8T-oeHMu-Le3QH
+   73  cd
+   74  yum install httpd-tools -y
+   75  oc whoami 
+   76  oc completion bash > /etc/bash_completion.d/oc
+   77  bash
+   78  hostnamectl set-hostname setup
+   79  bsahbash
+   80  bash
+   81  oc whoami 
+   82  ls
+   83  cd code
+   84  ls
+   85  cp pod2.yaml dbpod.yaml 
+   86  vim dbpod.yaml 
+   87  oc create  -f dbpod.yaml 
+   88  oc get pods
+   89   -w
+   90  oc get pods -w
+   91  oc get pods
+   92  oc delete  pod database  --force  --grace-period=0
+   93  vim dbpod.yaml 
+   94  oc create  -f dbpod.yaml 
+   95  oc get pods
+   96  oc exec -it database -- env
+   97  oc create  configmap mayank --from-literal=MYSQL_ROOT_PASSWORD=qwerty  --from-literal=MYSQL_DATABASE=mayank
+   98  oc get cm 
+   99  oc describe  cm mayank 
+  100  cp dbpod.yaml cmdbpod.yaml
+  101  vim cmdbpod.yaml 
+  102  oc get pods
+  103  oc set env pod/database --from configmap/mayank
+  104  oc delete  pod database --force --grace-period=0
+  105  oc describe  pod database 
+  106  oc exec -it database -- env
+  107  oc delete all --all 
+  108  oc new-app --as-deployment-config   quay.io/mayank123modi/mysql --name mydb 
+  109  oc get pods
+  110  oc describe cm mayank 
+  111  oc set env dc/mydb --from cm/mayank 
+  112  oc get pods
+  113  cat dbpod.yaml 
+  114  cat cmdbpod.yaml 
+  115  history 
+  116  oc delete  all --all 
+  117  cp 
+  118  oc get secret
+  119  oc create secret generic mayank --from-literal=MYQSL_ROOT_PASSWORD=testing1234
+  120  cp cmdbpod.yaml  secretdbpod.yaml
+  121  vim secretdbpod.yaml 
+  122  oc create  -f secretdbpod.yaml 
+  123  oc describe pod database 
+  124  oc get pods
+  125  vim secretdbpod.yaml 
+  126  oc get pods
+  127  oc delete  pod database --force  --grace-period=0
+  128  oc delete  secrets mayank 
+  129  oc create secret generic mayank --from-literal=MYSQL_ROOT_PASSWORD=testing1234
+  130  oc create  -f secretdbpod.yaml 
+  131  oc get pods
+  132  oc describe  pod database 
+  133  history 
+  134  oc new-app --as-deployment-config   quay.io/mayank123modi/mysql --name mydb 
+  135  oc get pods
+  136  oc get pods -w
+  137  oc set env dc/mydb --from secret/mayank
+  138  oc get pods
+  139  oc get pods -w
+  140  oc get pods
+  141  ls
+  142  ls- l 
+  143  ls -l 
+  144  history 
+  145  ls
+  146  cat dbpod.yaml 
+  147  cat cmdbpod.yaml 
+  148  cat secretdbpod.yaml 
+  149  oc get pods
+  150  oc  delete  pod database  --force 
+  151  oc run mydb --image=mysql 
+  152  oc get pods
+  153  oc describe  pod mydb 
+  154  oc logs -f pod/mydb 
+  155  oc login -u admin https://api.ex288.openshiftlab.xyz:6443
+  156  oc login -u user4  https://api.ex288.openshiftlab.xyz:6443
+  157  oc login -u admin https://api.ex288.openshiftlab.xyz:6443
+  158  podman
+  159  docker
+  160  cat /etc/os-release 
+  161  yum install  podman -y
+  162  podman 
+  163  mkdir docker
+  164  cd docker/
+  165  ls
+  166  vim Dockerfile 
+  167  ls
+  168  pdoman images
+  169  podman images
+  170  cat Dockerfile 
+  171  ls
+  172  vim index.html
+  173  yum install vim* -y
+  174  vim index.html 
+  175  podman build -t oracleapache . 
+  176  podman images
+  177  podman history oracleapache
+  178  podman run -itd --name myapache -p 2323:80 oracleapache 
+  179  curl ifconfig.me
+  180  podman run -itd  -p 3333:80 oracleapache 
+  181  history 
+  182  podman ps
+  183  history 
+  184  curl ifconfig.me
+  185  ifconfig
+  186  ping google.com 
+  187  cat Dockerfile 
+  188  podman search oraclelinux 
+  189  vim /etc/containers/registries.conf
+  190  podman images
+  191  podman history  oracleapache
+  192  mkdir test
+  193  ls
+  194  cp Dockerfile  index.html   test/
+  195  cd test/
+  196  ls
+  197  mv Dockerfile   mayankfile
+  198  ls
+  199  podman build -t mayankimage . 
+  200  cp mayankfile /root/ 
+  201  ls
+  202  mv mayankfile  /root/
+  203  ls
+  204  podman build -t mayank  -f mayankfile /root/mayankfile 
+  205  podman build -t mayank  -f mayankfile /root/
+  206  podman build -t mayank  --help 
+  207  podman build -t mayank  -f /root/mayankfile 
+  208  ls -l /root/
+  209  podman run  -itd  mayank 
+  210  podman exec -it mayank bash 
+  211  podman ps
+  212  podman exec -it flamboyant_beaver bash 
+  213  l
+  214  ls
+  215  podman build -t mayank  -f /root/mayankfile . 
+  216  podman exec -it --name test mayank bash 
+  217  podman run  -itd  --name test mayank 
+  218  podman exec -it --name test mayank bash 
+  219  podman exec -it  test mayank bash 
+  220  podman exec -it  test bash 
+  221  history 
+  222  pwd
+  223  ls
+  224  cat ma
+  225  ls
+  226  cat /root/mayankfile 
+  227  ls
+  228  pwd
+  229  ls
+  230  cp /root/mayankfile  . 
+  231  ls
+  232  vim mayankfile 
+  233  ls
+  234  cd ..
+  235  ls
+  236  cd ..
+  237  ls
+  238  cd cils
+  239  cd code/
+  240  ls
+  241  cd ..
+  242  ls
+  243  git clone 
+  244  git clone  https://github.com/mdhack0316/Ex288-Training-
+  245  ls
+  246  cd code/
+  247  ls
+  248  cd ..
+  249  ls
+  250  cd docker/
+  251  ls
+  252  cd test/
+  253  ls
+  254  cd
+  255  ls
+  256  mv code/ docker/ Ex288-Training-/
+  257  cd Ex288-Training-/
+  258  ls
+  259  git add . 
+  260  git commit -m "Day2" . 
+  261  git config --global  user.email "mayank123modi@gmail.com"
+  262  git config --global  user.name mayank 
+  263  git commit -m "Day2" . 
+  264  git push 
+  265  l
+  266  history 
+  267  ls
+  268  podman pull registry.redhat.io/rhscl/httpd-24-rhel7
+  269  podman login registry.redhat.io
+  270  podman pull registry.redhat.io/rhscl/httpd-24-rhel7
+  271  skopeo
+  272  yum install skopeo -y
+  273  yumdownloader skopeo 
+  274  yum install httpd -y
+  275  cp skopeo-1.2.2-10.module+el8.4.0+11311+9da8acfb.x86_64.rpm   /var/www/html/
+  276  cd /var/www/html/
+  277  l
+  278  ls
+  279  systemctl enable --now httpd
+  280  wget http://54.219.212.4/skopeo-1.2.2-10.module+el8.4.0+11311+9da8acfb.x86_64.rpm 
+  281  LS
+  282  history 
+  283  podman pull rhel8/nginx-116
+  284  podman logout registry.redhat.io
+  285  podman images
+  286  podman rmi -f registry.redhat.io/rhel8/nginx-116 
+  287  podman pull rhel8/nginx-116
+  288  podman login registry.redhat.io
+  289  podman pull rhel8/nginx-116
+  290  skopeo
+  291  history 
+  292  ls
+  293  skopeo
+  294  history 
+  295  ls
+  296  cd
+  297  cd /etc/yum.repos.d/
+  298  l
+  299  ls
+  300  lls
+  301  ls
+  302  cd
+  303  skopeo copy  docker://docker.io/mdhack/testapache:latest  quay.io/mayank123modi/testingapache 
+  304  skopeo copy  docker://docker.io/mdhack/testapache:latest  docker://quay.io/mayank123modi/testingapache 
+  305  skopeo copy  --dest-creds=mayank123modi:@MDhack180316  docker://docker.io/mdhack/testapache:latest  docker://quay.io/mayank123modi/testingapache 
+  306  skopeo inspect   docker://quay.io/mayank123modi/testingapache 
+  307  skopeo inspect   --creds=mayank123modi:@MDhack180316   docker://quay.io/mayank123modi/testingapache 
+  308  history 
+  309  history  > history.txt 
