@@ -1,0 +1,123 @@
+apiVersion: v1
+items:
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: openshiftphp
+      app.kubernetes.io/component: openshiftphp
+      app.kubernetes.io/instance: openshiftphp
+    name: openshiftphp
+  spec:
+    lookupPolicy:
+      local: false
+  status:
+    dockerImageRepository: ""
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: openshiftphp
+      app.kubernetes.io/component: openshiftphp
+      app.kubernetes.io/instance: openshiftphp
+    name: openshiftphp
+  spec:
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: openshiftphp:latest
+    postCommit: {}
+    resources: {}
+    source:
+      git:
+        uri: https://github.com/mdhack0316/openshiftphp
+      type: Git
+    strategy:
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: php:7.3
+          namespace: openshift
+      type: Source
+    triggers:
+    - github:
+        secret: Usr7ksqJhiSLolOc6bKu
+      type: GitHub
+    - generic:
+        secret: bopCnAHITMcOUye2_Slu
+      type: Generic
+    - type: ConfigChange
+    - imageChange: {}
+      type: ImageChange
+  status:
+    lastVersion: 0
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"openshiftphp:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"openshiftphp\")].image"}]'
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: openshiftphp
+      app.kubernetes.io/component: openshiftphp
+      app.kubernetes.io/instance: openshiftphp
+    name: openshiftphp
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        deployment: openshiftphp
+    strategy: {}
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftNewApp
+        creationTimestamp: null
+        labels:
+          deployment: openshiftphp
+      spec:
+        containers:
+        - image: ' '
+          name: openshiftphp
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          - containerPort: 8443
+            protocol: TCP
+          resources: {}
+  status: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: openshiftphp
+      app.kubernetes.io/component: openshiftphp
+      app.kubernetes.io/instance: openshiftphp
+    name: openshiftphp
+  spec:
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: 8443-tcp
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    selector:
+      deployment: openshiftphp
+  status:
+    loadBalancer: {}
+kind: List
+metadata: {}

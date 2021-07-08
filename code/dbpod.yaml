@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: first
+  name: database
+spec:
+  containers:
+  - image: quay.io/mayank123modi/mysql
+    name: first
+    env: 
+    - name: MYSQL_ROOT_PASSWORD
+      value: redhat
+    - name: MYSQL_DATABASE
+      value: testdatabase
+    - name: MYSQL_USER
+      value: mayank
+    - name: MYSQL_PASSWORD
+      value: redhat@1234
